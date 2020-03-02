@@ -1,14 +1,14 @@
 def teste():
-    maoroyal=[(9,"D"),(10,"D"),(11,"D"),(12,"D"),(13,"D")]
-    maostra=[(4,"D"),(6,"D"),(5,"D"),(7,"D"),(8,"D")]
-    maoquadra=[(4,"D"),(4,"C"),(4,"H"),(4,"S"),(8,"D")]
-    maofullhouse=[(4,"D"),(4,"C"),(4,"H"),(8,"S"),(8,"D")]
-    maoflush=[(2,"D"),(5,"D"),(6,"D"),(7,"D"),(8,"D")]
-    maostraight=[(3,"H"),(2,"H"),(6,"D"),(5,"D"),(4,"D")]
-    maotrinca=[(3,"H"),(3,"D"),(3,"G"),(5,"D"),(4,"D")]
-    maodoispares=[(3,"H"),(3,"D"),(4,"G"),(4,"D"),(8,"D")]
-    maopar=[(3,"H"),(3,"D"),(5,"G"),(9,"D"),(8,"D")]
-    maocartaalta=[(3,"H"),(11,"D"),(5,"G"),(9,"D"),(8,"D")]
+    maoroyal = [["10", "D"], ["11", "D"], ["12", "D"], ["13", "D"], ["14", "D"]]
+    maostra = [["4 ", "D"], ["6", "D"], ["5", "D"], ["7", "D"], ["8", "D"]]
+    maoquadra = [["4 ", "D"], ["4", "C"], ["4", "H"], ["4", "S"], ["8", "D"]]
+    maofullhouse = [["4", "D"], ["4 ", "C"], ["4", "H"], ["8", "S"], ["8", "D"]]
+    maoflush = [["2", "D"], ["5", "D"], ["6", "D"], ["6", "D"], ["8", "D"]]
+    maostraight = [["3", "H"], ["2", "H"], ["6", "D"], ["5", "D"], ["4", "D"]]
+    maotrinca = [["3", "H"], ["3", "D"], ["3", "S"], ["5", "D"], ["4", "D"]]
+    maodoispares = [["3", "H"], ["3", "D"], ["4", "H"], ["4", "D"], ["8", "D"]]
+    maopar = [["3", "D"], ["3", "C"], ["5", "D"], ["9", "S"], ["8", "H"]]
+    maocartaalta = [["3", "S"], ["11", "H"], ["5", "D"], ["9", "C"], ["8", "D"]]
     cartaal1 = [["5", "D"], ["8", "C"], ["9", "S"], ["T", "S"], ["A", "C"]]
     cartaal2 = [["2", "C"], ["5", "C"], ["7", "D"], ["8", "S"], ["Q", "H"]]
     pardamas1 = [["4", "D"], ["6", "S"], ["9", "H"], ["Q", "H"], ["Q", "D"]]
@@ -74,21 +74,21 @@ def descobrirmao(maoteste):
                 cartaalta = True
 
     if straightflush == True:
-        valor = 10
+        valor = 10,maoteste[0][1]
     elif royalflush == True:
-        valor = 9
+        valor = 9,maoteste[0][1]
     elif quadra == True:
-        valor = 8
+        valor = 8,0
     elif fullhouse == True:
         valor = 7,maoteste[2][0]
     elif flush == True:
         valor = 6,maoteste[0][1]
     elif straight == True:
-        valor = 5
+        valor = 5,0
     elif trinca == True:
-        valor = 4
+        valor = 4,0
     elif doispares == True:
-        valor = 3
+        valor = 3,0
     elif par == True:
         valor = 2,valormao,valormao1
     elif cartaalta == True:
@@ -115,16 +115,29 @@ def converterletpnume(maoteste):
         elif carta[1]=="C":
             carta[1]=4
 
+
     return maoteste
 def inserirmaojogador(maojoga):
+
+
     for mao in range(5):
+        print("2 a 9")
+        print("T - Valete         K- Rei              Q - Rainha          A - Às")
         carta = input("Insira a carta %dº" % (mao + 1)).upper()
+        while carta!= "T" and carta!="K" and carta!="Q" and carta!="A" and carta!="1" and carta!="2"\
+            and carta!="3" and carta!="4" and carta!="5" and carta!="6" and carta!="7" and carta!="8" and carta!="9":
+            carta = input("Insira a carta %dº" % (mao + 1)).upper()
+
+        print("H - Copa           D - Ouro            C - Espada          S - Paus")
         naipe = input("Insira o Naipe da carta").upper()
-        maojoga.append([carta, naipe])
+        while naipe!= "H" and naipe!="D" and naipe!="C" and naipe!="S":
+            naipe = input("Insira o Naipe da carta").upper()
+        maojoga.append([str(carta), naipe])
 conversor={1:"Carta Alta",2:"Par",3:"Dois Pares",
           4:"Trinca",5:"Straight",6:"Flush",
           7:"Full House",8:"Quadra",9:"Straight Flush",
           10:"Royal Flush"}
+
 
 
 
@@ -134,15 +147,15 @@ maojoga2=[]
 
 
 
-#print("Jogador 1")
-#inserirmaojogador(maojoga1)
-#print("Jogador 2")
-#inserirmaojogador(maojoga2)
+print("Jogador 1")
+inserirmaojogador(maojoga1)
+print("Jogador 2")
+inserirmaojogador(maojoga2)
 
 
 
-maox=converterletpnume(pardamas1)
-maoy=converterletpnume(pardamas2)
+maox=converterletpnume(maojoga1)
+maoy=converterletpnume(maojoga2)
 
 
 maox=sorted(maox)
