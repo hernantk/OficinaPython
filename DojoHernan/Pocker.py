@@ -15,8 +15,10 @@ def teste():
     pardamas2 = [["3", "D"], ["6", "D"], ["7", "H"], ["Q", "D"], ["Q", "S"]]
     fullhouse1 = [["2", "H"], ["2", "D"], ["4", "C"], ["4", "D"], ["4", "S"]]
     fullhouse2 = [["3", "C"], ["3", "D"], ["3", "S"], ["9", "S"], ["9", "D"]]
+
+
 def descobrirmao(maoteste):
-    c=0
+    c = 0
     royalflush = False
     straightflush = False
     quadra = False
@@ -47,8 +49,8 @@ def descobrirmao(maoteste):
             if maoteste[i][0] == maoteste[i + 1][0]:
                 c += 1
 
-                valormao=maoteste[i][1]
-                valormao1=maoteste[i+1][1]
+                valormao = maoteste[i][1]
+                valormao1 = maoteste[i + 1][1]
         if c == 3 and (maoteste[3][0] != maoteste[4][0] or maoteste[0][0] != maoteste[1][0]):
             quadra = True
         elif c == 3:
@@ -74,26 +76,28 @@ def descobrirmao(maoteste):
                 cartaalta = True
 
     if straightflush == True:
-        valor = 10,maoteste[0][1]
+        valor = 10, maoteste[0][1]
     elif royalflush == True:
-        valor = 9,maoteste[0][1]
+        valor = 9, maoteste[0][1]
     elif quadra == True:
-        valor = 8,0
+        valor = 8, 0
     elif fullhouse == True:
-        valor = 7,maoteste[2][0]
+        valor = 7, maoteste[2][0]
     elif flush == True:
-        valor = 6,maoteste[0][1]
+        valor = 6, maoteste[0][1]
     elif straight == True:
-        valor = 5,0
+        valor = 5, 0
     elif trinca == True:
-        valor = 4,0
+        valor = 4, 0
     elif doispares == True:
-        valor = 3,0
+        valor = 3, 0
     elif par == True:
-        valor = 2,valormao,valormao1
+        valor = 2, valormao, valormao1
     elif cartaalta == True:
-        valor = 1,maoteste[4][0]
+        valor = 1, maoteste[4][0]
     return valor
+
+
 def converterletpnume(maoteste):
     for carta in maoteste:
         if carta[0] == "T":
@@ -106,72 +110,60 @@ def converterletpnume(maoteste):
             carta[0] = 14
         else:
             carta[0] = int(carta[0])
-        if carta[1]=="S":
-            carta[1]=1
-        elif carta[1]=="H":
-            carta[1]=2
-        elif carta[1]=="D":
-            carta[1]=3
-        elif carta[1]=="C":
-            carta[1]=4
-
+        if carta[1] == "S":
+            carta[1] = 1
+        elif carta[1] == "H":
+            carta[1] = 2
+        elif carta[1] == "D":
+            carta[1] = 3
+        elif carta[1] == "C":
+            carta[1] = 4
 
     return maoteste
+
+
 def inserirmaojogador(maojoga):
-
-
     for mao in range(5):
         print("2 a 9")
         print("T - Valete         K- Rei              Q - Rainha          A - Às")
         carta = input("Insira a carta %dº" % (mao + 1)).upper()
-        while carta!= "T" and carta!="K" and carta!="Q" and carta!="A" and carta!="1" and carta!="2"\
-            and carta!="3" and carta!="4" and carta!="5" and carta!="6" and carta!="7" and carta!="8" and carta!="9":
+        while carta != "T" and carta != "K" and carta != "Q" and carta != "A" and carta != "1" and carta != "2" \
+                and carta != "3" and carta != "4" and carta != "5" and carta != "6" and carta != "7" and carta != "8" and carta != "9":
             carta = input("Insira a carta %dº" % (mao + 1)).upper()
 
         print("H - Copa           D - Ouro            C - Espada          S - Paus")
         naipe = input("Insira o Naipe da carta").upper()
-        while naipe!= "H" and naipe!="D" and naipe!="C" and naipe!="S":
+        while naipe != "H" and naipe != "D" and naipe != "C" and naipe != "S":
             naipe = input("Insira o Naipe da carta").upper()
         maojoga.append([str(carta), naipe])
-conversor={1:"Carta Alta",2:"Par",3:"Dois Pares",
-          4:"Trinca",5:"Straight",6:"Flush",
-          7:"Full House",8:"Quadra",9:"Straight Flush",
-          10:"Royal Flush"}
 
 
+conversor = {1: "Carta Alta", 2: "Par", 3: "Dois Pares",
+             4: "Trinca", 5: "Straight", 6: "Flush",
+             7: "Full House", 8: "Quadra", 9: "Straight Flush",
+             10: "Royal Flush"}
 
-
-
-maojoga1=[]
-maojoga2=[]
-
-
+maojoga1 = []
+maojoga2 = []
 
 print("Jogador 1")
 inserirmaojogador(maojoga1)
 print("Jogador 2")
 inserirmaojogador(maojoga2)
 
+maox = converterletpnume(maojoga1)
+maoy = converterletpnume(maojoga2)
 
-
-maox=converterletpnume(maojoga1)
-maoy=converterletpnume(maojoga2)
-
-
-maox=sorted(maox)
-maoy=sorted(maoy)
+maox = sorted(maox)
+maoy = sorted(maoy)
 print(maox)
 print(maoy)
 
-mao1=descobrirmao(maox)
-mao2=descobrirmao(maoy)
+mao1 = descobrirmao(maox)
+mao2 = descobrirmao(maoy)
 print(mao1)
 print(mao2)
-if mao1>mao2:
-    print("O jogador 1 Ganhou por "+conversor[mao1[0]])
+if mao1 > mao2:
+    print("O jogador 1 Ganhou por " + conversor[mao1[0]])
 else:
-    print("O jogador 2 Ganhou por "+conversor[mao2[0]])
-
-
-
-
+    print("O jogador 2 Ganhou por " + conversor[mao2[0]])
